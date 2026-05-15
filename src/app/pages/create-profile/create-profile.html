@@ -1,0 +1,15 @@
+<form (ngSubmit)="createProfile()">
+  <div class="mb-3">
+    <label for="exampleInputEmail1" class="form-label">Name</label>
+    
+    <input type="text" class="form-control" [(ngModel)]="name" name="name">
+  </div>
+  <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Age</label>
+    
+    <input type="number" class="form-control" [(ngModel)]="age" name="age">
+
+  </div>
+  
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>

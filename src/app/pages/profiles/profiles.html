@@ -1,0 +1,37 @@
+<h2 class="mb-4">
+  All Profiles
+</h2>
+
+<div class="row">
+
+  <div
+    class="col-md-4 mb-4"
+    *ngFor="let profile of profiles"
+  >
+
+    <div class="card shadow">
+
+      <div class="card-body">
+
+        <h5>
+          Name:{{ profile.name }}
+        </h5>
+
+        <p>
+          Age: {{ profile.age }}
+        </p>
+
+
+        <button
+          class="btn btn-danger"
+          (click)="deleteProfile(profile.id)">
+          Delete
+        </button>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
