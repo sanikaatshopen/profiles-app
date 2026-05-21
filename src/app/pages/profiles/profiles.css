@@ -1,0 +1,34 @@
+.profile-card {
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+.profile-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15) !important;
+}
+
+.avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.age-btn {
+    width: 50px;
+    height: 50px;
+    font-size: 1.4rem;
+    font-weight: bold;
+}
+
+.badge {
+    font-size: 0.9rem;
+}
+
+.card-header {
+    background: linear-gradient(135deg, #0d6efd, #4f8cff);
+}

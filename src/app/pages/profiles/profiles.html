@@ -1,31 +1,143 @@
-<h2 class="mb-4">
-  All Profiles
-</h2>
+<div class="container py-5">
 
-<div class="row">
+  <!-- Heading -->
+  <div class="text-center mb-5">
+    <h1 class="fw-bold display-5 text-primary">
+      All Profiles
+    </h1>
+    <p class="text-muted">
+      Manage and explore user profiles
+    </p>
+  </div>
 
-  <div
-    class="col-md-4 mb-4"
-    *ngFor="let profile of profiles"
-  >
+  <!-- Profile Cards -->
+  <div class="row g-4">
 
-    <div class="card shadow">
+    <div class="col-lg-4 col-md-6" *ngFor="let profile of profiles">
 
-      <div class="card-body">
+      <div class="card border-0 shadow-lg rounded-4 profile-card h-100">
 
-        <h5>
-          Name:{{ profile.name }}
+        <!-- Card Header -->
+        <div class="card-header bg-primary text-white rounded-top-4 border-0 py-3">
+
+          <div class="d-flex align-items-center">
+
+            <!-- Avatar -->
+            <div class="avatar bg-white text-primary fw-bold me-3">
+              {{ profile.name.charAt(0) }}
+            </div>
+
+            <div>
+              <h5 class="mb-0 fw-bold">
+                {{ profile.name }}
+              </h5>
+
+              <small class="opacity-75">
+                Profile ID: {{ profile._id }}
+              </small>
+            </div>
+
+          </div>
+
+        </div>
+
+        <!-- Card Body -->
+        <div class="card-body d-flex flex-column">
+
+          <!-- Age Section -->
+          <div class="d-flex justify-content-between align-items-center mb-4">
+
+            <div>
+              <h6 class="text-muted mb-1">
+                Age
+              </h6>
+
+              <h3 class="fw-bold text-dark">
+                {{ profile.age }}
+              </h3>
+            </div>
+
+            <button class="btn btn-primary rounded-circle age-btn" (click)="increaseAge(profile._id)">
+              +
+            </button>
+
+          </div>
+
+          <!-- Hobbies -->
+          <div *ngIf="profile.hobbies?.length">
+
+            <h6 class="text-muted mb-3">
+              Hobbies
+            </h6>
+
+            <div class="d-flex flex-wrap gap-2">
+
+              <span class="badge bg-light text-dark px-3 py-2 rounded-pill" *ngFor="let hobby of profile.hobbies">
+                {{ hobby | titlecase }}
+              </span>
+
+            </div>
+
+          </div>
+
+          <!-- Spacer -->
+          <div class="flex-grow-1"></div>
+
+          <!-- Actions -->
+          <div class="mt-4 d-grid gap-3">
+
+            <button class="btn btn-outline-primary rounded-pill fw-semibold" data-bs-toggle="modal"
+              data-bs-target="#hobbyModal" (click)="selectedProfileId = profile._id">
+              Add Hobbies
+            </button>
+
+            <button class="btn btn-outline-danger rounded-pill fw-semibold" (click)="deleteProfile(profile._id)">
+              <i class="bi bi-trash me-2"></i>
+              Delete Profile
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+<!-- Hobbies Modal -->
+
+<div class="modal fade" id="hobbyModal" tabindex="-1">
+
+  <div class="modal-dialog">
+
+    <div class="modal-content">
+
+      <!-- Header -->
+      <div class="modal-header">
+
+        <h5 class="modal-title">
+          Add Hobbies
         </h5>
 
-        <p>
-          Age: {{ profile.age }}
-        </p>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
 
+      </div>
 
-        <button
-          class="btn btn-danger"
-          (click)="deleteProfile(profile.id)">
-          Delete
+      <!-- Body -->
+      <div class="modal-body">
+
+        <input type="text" class="form-control" placeholder="Reading, Coding, Music" [(ngModel)]="hobbyInput">
+
+      </div>
+
+      <!-- Footer -->
+      <div class="modal-footer">
+
+        <button class="btn btn-primary" (click)="saveHobbies(selectedProfileId)" data-bs-dismiss="modal">
+          Save Hobbies
         </button>
 
       </div>
