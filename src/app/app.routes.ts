@@ -6,6 +6,8 @@ import { CreateProfile } from './pages/create-profile/create-profile';
 
 import { UpdateProfile } from './pages/update-profile/update-profile';
 
+import { Login } from './pages/login/login';
+
 export const routes: Routes = [
   {
     path: '',
@@ -18,5 +20,9 @@ export const routes: Routes = [
   {
     path: 'update/:id',
     component: UpdateProfile
+  },
+  {
+    path: 'login',
+    component: Login
   }
 ];

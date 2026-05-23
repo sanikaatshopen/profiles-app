@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
+import { HttpHeaders } from '@angular/common/http';
 
 interface Profile {
   _id: string;
@@ -19,6 +20,20 @@ interface ProfilesResponse {
   providedIn: 'root',
 })
 export class ProfilesService {
+
+  getHeaders() {
+
+    var token = localStorage.getItem('token');
+
+    return {
+      headers: new HttpHeaders({
+        Authorization: token || ''
+      })
+    };
+
+  }
+
+
 
   constructor(private http: HttpClient) { }
 
@@ -45,14 +60,16 @@ export class ProfilesService {
 
     return this.http.put(
       `${this.BASE_URL}/api/update/profiles/${profileId}/add-hobby`,
-      { hobby: hobby }
-    );
+      { hobby: hobby },
+      this.getHeaders()
 
+    );
   }
   deleteProfile(id: string) {
 
     return this.http.delete(
-      `${this.BASE_URL}/api/delete-profile/${id}`
+      `${this.BASE_URL}/api/delete-profile/${id}`,
+      this.getHeaders()
     );
 
   }
@@ -63,7 +80,8 @@ export class ProfilesService {
 
       `${this.BASE_URL}/api/update/profiles/${id}/increase-age`,
 
-      {}
+      {},
+    this.getHeaders()
 
     );
 
